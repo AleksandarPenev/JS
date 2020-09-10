@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Task 1</title>
+        <link rel="stylesheet" href="assets/css/style.css">
+    </head>
+    <body>
+        <div class="keyz">
+            <div class="key key-a">
+                <kbd>A</kbd>
+                <span class="sound">clap</span>
+            </div>
+            <div class="key key-s">
+                <kbd>S</kbd>
+                <span class="sound">hihat</span>
+            </div>
+            <div class="key key-d">
+                <kbd>D</kbd>
+                <span class="sound">kick</span>
+            </div>
+            <div class="key key-f">
+                <kbd>F</kbd>
+                <span class="sound">openhat</span>
+            </div>
+            <div class="key key-g">
+                <kbd>G</kbd>
+                <span class="sound">boom</span>
+            </div>
+            <div class="key key-h">
+                <kbd>H</kbd>
+                <span class="sound">ride</span>
+            </div>
+            <div class="key key-j">
+                <kbd>J</kbd>
+                <span class="sound">snare</span>
+            </div>
+            <div class="key key-k">
+                <kbd>K</kbd>
+                <span class="sound">tom</span>
+            </div>
+            <div class="key key-l">
+                <kbd>L</kbd>
+                <span class="sound">tink</span>
+            </div>
+        </div>                    
+
+        <audio src="assets/sounds/clap.wav" class="audio-key-a"></audio>
+        <audio src="assets/sounds/hihat.wav" class="audio-key-s"></audio>
+        <audio src="assets/sounds/kick.wav" class="audio-key-d"></audio>
+        <audio src="assets/sounds/openhat.wav" class="audio-key-f"></audio>
+        <audio src="assets/sounds/boom.wav" class="audio-key-g"></audio>
+        <audio src="assets/sounds/ride.wav" class="audio-key-h"></audio>
+        <audio src="assets/sounds/snare.wav" class="audio-key-j"></audio>
+        <audio src="assets/sounds/tom.wav" class="audio-key-k"></audio>
+        <audio src="assets/sounds/tink.wav" class="audio-key-l"></audio>
+    
+        <script type="text/javascript">
+            document.addEventListener('keydown', function(event){
+                document.querySelector(`.key-${event.key}`).classList.add('playing');
+                document.querySelector(`.audio-key-${event.key}`).play();
+            })
+
+            document.addEventListener('keyup', function(event){
+                document.querySelector(`.key-${event.key}`).classList.remove('playing');                
+            })
+        </script>
+    </body>
+</html>

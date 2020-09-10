@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Task 2</title>
+        <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="assets/css/style.css">
+    </head>
+    <body>
+
+        <h1>Whack-a-mole! <span class="score">0</span></h1>
+
+        <div class="game">
+            <div class="hole">
+                <div class="mole"></div>
+            </div>
+            <div class="hole">
+                <div class="mole"></div>
+            </div>
+            <div class="hole">
+                <div class="mole"></div>
+            </div>
+            <div class="hole">
+                <div class="mole"></div>
+            </div>
+            <div class="hole">
+                <div class="mole"></div>
+            </div>
+            <div class="hole">
+                <div class="mole"></div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button>Start!</button>
+        </div><!-- /.actions -->
+
+        <script>
+            
+            const holes = document.querySelectorAll('.hole');
+            const scoreBoard = document.querySelector('.score');
+            const moles = document.querySelectorAll('.mole');
+            let lastHole;
+            let timeUp = false;
+            let score = 0;
+
+            function getRandomNumber(min, max) {
+                return Math.round(Math.random() * (max - min) + min);
+            };
+
+            function showMole() {
+                const time = getRandomNumber(400, 700); 
+                const holeIndex = Math.floor(Math.random() * holes.length);
+                const hole = holes[holeIndex];
+
+                hole.classList.add('up'); 
+                moles.forEach(mole => mole.addEventListener('click', wack));
+
+                setTimeout(() => {
+                    hole.classList.remove('up'); 
+                    if(!timeUp) {
+                        showMole();
+                    }
+                }, time);
+            };
+
+            function startGame() {
+                scoreBoard.textContent = 0;
+                timeUp = false;
+                score = 0;
+                showMole(); 
+                setTimeout(function() {
+                    timeUp = true;
+                    alert(`Game over! Your score is ${score}!`)
+                }, 10000);
+            };
+
+            function wack(e){
+                score++;
+                this.removeEventListener('click', wack);
+                this.parentNode.classList.remove('up');
+                scoreBoard.textContent = score;                     
+            };
+
+            document.querySelector('.actions button').addEventListener('click', startGame); 
+
+        </script>
+    </body>
+</html>
